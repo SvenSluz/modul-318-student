@@ -12,8 +12,4 @@
     <ProjectReference Include="..\src\SwissTransport\SwissTransport.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Verbindungen\" />
-  </ItemGroup>
-
 </Project>
