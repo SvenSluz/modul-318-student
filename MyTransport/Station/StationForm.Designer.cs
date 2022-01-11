@@ -91,7 +91,7 @@
             this.comboBoxStations.Name = "comboBoxStations";
             this.comboBoxStations.Size = new System.Drawing.Size(586, 49);
             this.comboBoxStations.TabIndex = 1;
-            this.comboBoxStations.TextChanged += new System.EventHandler(this.comboBoxStations_TextChanged);
+            this.comboBoxStations.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxStations_KeyPress);
             // 
             // labelTitel
             // 

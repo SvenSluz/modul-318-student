@@ -10,11 +10,11 @@ namespace MyTransport.Connections
 {
     public partial class ConnectionsForm : Form 
     {
-        private readonly ConnectionProvider _connectionProvider;
+        private readonly DataProvider _dataProvider;
         public ConnectionsForm()
         {
             InitializeComponent();
-            _connectionProvider = new ConnectionProvider();
+            _dataProvider = new DataProvider();
             DateTimePickerDeparture.Text = DateTime.Now.ToShortDateString();
             timePicker.Format = DateTimePickerFormat.Custom;
             timePicker.CustomFormat = "HH:mm";
@@ -24,7 +24,7 @@ namespace MyTransport.Connections
 
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
-            var connections = _connectionProvider.GetConnectionsWithTimeAndDate(DateTimePickerDeparture.Text,timePicker.Text, comboBoxDepartureStation.Text, comboBoxArrivalStation.Text);
+            var connections = _dataProvider.GetConnectionsWithTimeAndDate(DateTimePickerDeparture.Text,timePicker.Text, comboBoxDepartureStation.Text, comboBoxArrivalStation.Text);
             dataGridViewConnectionTable.Rows.Clear();
             foreach (var con in connections.ConnectionList)
             {

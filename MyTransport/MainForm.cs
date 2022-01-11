@@ -10,8 +10,8 @@ namespace MyTransport
             InitializeComponent();
         }
 
-        private Form ConnectionForm;
-        private Form StationForm;
+        private Form? ConnectionForm { get; set; }
+        private Form? StationForm { get; set; }
 
         private void OpenConnectionForm_click(object sender, EventArgs e)
         {

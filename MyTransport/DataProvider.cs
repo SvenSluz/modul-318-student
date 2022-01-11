@@ -3,27 +3,18 @@ using SwissTransport.Models;
 
 namespace MyTransport
 {
-    public class ConnectionProvider
+    public class DataProvider
     {
         private readonly Transport _transport;
-        public ConnectionProvider()
+        public DataProvider()
         {
             _transport = new Transport();
         }
 
-        public Task<List<string>> GetSimilarStations(string input)
+        public Task<List<string>>? GetSimilarStations(string input)
         {
-            try
-            {
-                Stations? stations = _transport.GetStationsAsync(input).GetAwaiter().GetResult();
-                return Task.FromResult(stations.StationList.Select(s => s.Name).ToList());
-                
-            }
-            catch (Exception)
-            {
-                return Task.FromResult<List<string>>(null);
-            }
-
+            var stations = _transport.GetStationsAsync(input).GetAwaiter().GetResult();
+            return stations.StationList.Count==0 ? null : Task.FromResult(stations.StationList.Select(s => s.Name).ToList());
         }
 
         public SwissTransport.Models.Connections GetConnections(string departureStation, string targetDestination)

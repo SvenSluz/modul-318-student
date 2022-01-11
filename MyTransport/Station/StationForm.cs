@@ -5,12 +5,26 @@
         public StationForm()
         {
             InitializeComponent();
-            _connectionProvider = new ConnectionProvider();
+            _dataProvider = new DataProvider();
         }
 
-        private readonly ConnectionProvider _connectionProvider;
+        private readonly DataProvider _dataProvider;
 
-        private void comboBoxStations_TextChanged(object sender, EventArgs e)
+        private void buttonLoadStationTable_Click(object sender, EventArgs e)
+        {
+            _dataProvider.GetId(comboBoxStations.Text);
+            labelHeader.Text = comboBoxStations.Text;
+
+            var boardTable = _dataProvider.GetStationBoard(comboBoxStations.Text, _dataProvider.GetId(comboBoxStations.Text));
+            foreach (var boardEntry in boardTable.Entries)
+            {
+                var connection = _dataProvider.GetConnections(comboBoxStations.Text, boardEntry.To);
+                dataGridViewStationTable.Rows.Add(boardEntry.Category+ boardEntry.Number, ((DateTime)boardEntry.Stop.Departure).ToShortTimeString(), boardEntry.To);
+            }
+
+        }
+
+        private void comboBoxStations_KeyPress(object sender, KeyPressEventArgs e)
         {
             var userInput = ((ComboBox)sender).Text;
             if (string.IsNullOrEmpty(userInput))
@@ -19,18 +33,9 @@
             }
             ComboBoxAutoComplete.AutoComplete(userInput, (ComboBox)sender);
         }
-        
-        private void buttonLoadStationTable_Click(object sender, EventArgs e)
-        {
-            _connectionProvider.GetId(comboBoxStations.Text);
-            labelHeader.Text = comboBoxStations.Text;
 
-            var table = _connectionProvider.GetStationBoard(comboBoxStations.Text, _connectionProvider.GetId(comboBoxStations.Text));
-            foreach (var boardEntry in table.Entries)
-            {
-                var connection = _connectionProvider.GetConnections(comboBoxStations.Text, boardEntry.To);
-                dataGridViewStationTable.Rows.Add(boardEntry.Category+ boardEntry.Number, ((DateTime)boardEntry.Stop.Departure).ToShortTimeString(), boardEntry.To);
-            }
+        private void comboBoxStations_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
