@@ -62,5 +62,13 @@
 
             connections.Should().NotBeNull();
         }
+
+        [Fact]
+        public async Task ConnectionsWithTimeAndDate()
+        {
+            Connections connections = await this.testee.GetConnectionWithTime("2022-01-01","15:00","Sursee", "Luzern");
+
+            connections.Should().NotBeNull();
+        }
     }
 }

@@ -23,9 +23,6 @@ namespace MyTransport.Connections
 
 
         }
-
-        private string DepartingStation;
-        private string ArrivalStation;
         private void ComboBoxWithAutoComplete_TextChanged(object sender, EventArgs e)
         {
             var userInput = ((ComboBox)sender).Text;
@@ -43,7 +40,7 @@ namespace MyTransport.Connections
             foreach (var con in connections.ConnectionList)
             {
                 var delay = con.From.Delay.ToString();
-                dataGridViewConnectionTable.Rows.Add(con.From.Station.Name, con.From.Platform, con.To.Station.Name, $"{((DateTime)con.From.Departure).ToShortTimeString()} '{delay}" ,((DateTime)con.To.Arrival).ToShortTimeString());
+                dataGridViewConnectionTable.Rows.Add(con.From.Station.Name, con.From.Platform, con.To.Station.Name, $"{((DateTime)con.From.Departure).ToShortTimeString()} +{delay}'" ,((DateTime)con.To.Arrival).ToShortTimeString());
             }
         }
 

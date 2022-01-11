@@ -49,19 +49,4 @@ namespace MyTransport.Station
 
         }
     }
-
-    public static class ComboBoxAutoComplete
-    {
-        public static void AutoComplete(string userInput, ComboBox comboBox)
-        {
-            var stations = new ConnectionProvider().GetSimilarStations(userInput).Result;
-            if (stations == null || stations.Count == 0) return;
-            var items = new List<string>(stations.Select(s => s.Item1).ToList());
-            foreach (var comboBoxItem in comboBox.Items)
-            {
-                comboBox.Items.Remove(comboBoxItem);
-            }
-            comboBox.Items.AddRange(items.ToArray());
-        }
-    }
 }

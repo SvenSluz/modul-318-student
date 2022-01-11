@@ -59,7 +59,7 @@
             this.OpenStationForm.Name = "OpenStationForm";
             this.OpenStationForm.Size = new System.Drawing.Size(239, 139);
             this.OpenStationForm.TabIndex = 1;
-            this.OpenStationForm.Text = "Station";
+            this.OpenStationForm.Text = "Stationen";
             this.OpenStationForm.UseVisualStyleBackColor = false;
             this.OpenStationForm.Click += new System.EventHandler(this.OpenStationForm_Click);
             // 
