@@ -55,7 +55,7 @@
             this.comboBoxDepartureStation.Name = "comboBoxDepartureStation";
             this.comboBoxDepartureStation.Size = new System.Drawing.Size(454, 49);
             this.comboBoxDepartureStation.TabIndex = 0;
-            this.comboBoxDepartureStation.TextChanged += new System.EventHandler(this.ComboBoxWithAutoComplete_TextChanged);
+            this.comboBoxDepartureStation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             // 
             // comboBoxArrivalStation
             // 
@@ -67,7 +67,7 @@
             this.comboBoxArrivalStation.Name = "comboBoxArrivalStation";
             this.comboBoxArrivalStation.Size = new System.Drawing.Size(455, 49);
             this.comboBoxArrivalStation.TabIndex = 1;
-            this.comboBoxArrivalStation.TextChanged += new System.EventHandler(this.ComboBoxWithAutoComplete_TextChanged);
+            this.comboBoxArrivalStation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             // 
             // tableLayoutPanelVerbindungen
             // 

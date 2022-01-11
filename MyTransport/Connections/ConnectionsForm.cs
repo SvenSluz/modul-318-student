@@ -10,32 +10,21 @@ namespace MyTransport.Connections
 {
     public partial class ConnectionsForm : Form 
     {
-        private readonly ConnectionProvider connectionProvider;
-        private ITransport _transport;
+        private readonly ConnectionProvider _connectionProvider;
         public ConnectionsForm()
         {
             InitializeComponent();
-            _transport = new Transport();
-            connectionProvider = new ConnectionProvider();
+            _connectionProvider = new ConnectionProvider();
             DateTimePickerDeparture.Text = DateTime.Now.ToShortDateString();
             timePicker.Format = DateTimePickerFormat.Custom;
             timePicker.CustomFormat = "HH:mm";
 
 
         }
-        private void ComboBoxWithAutoComplete_TextChanged(object sender, EventArgs e)
-        {
-            var userInput = ((ComboBox)sender).Text;
-            if (string.IsNullOrEmpty(userInput))
-            {
-                return;
-            }
-            ComboBoxAutoComplete.AutoComplete(userInput, (ComboBox)sender);
-        }
 
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
-            var connections = connectionProvider.GetConnectionsWithTimeAndDate(DateTimePickerDeparture.Text,timePicker.Text, comboBoxDepartureStation.Text, comboBoxArrivalStation.Text);
+            var connections = _connectionProvider.GetConnectionsWithTimeAndDate(DateTimePickerDeparture.Text,timePicker.Text, comboBoxDepartureStation.Text, comboBoxArrivalStation.Text);
             dataGridViewConnectionTable.Rows.Clear();
             foreach (var con in connections.ConnectionList)
             {
@@ -44,13 +33,14 @@ namespace MyTransport.Connections
             }
         }
 
-    }
-
-    internal static class ComboboxExtension
-    {   
-        internal static IEnumerable<string> GetList(this ComboBox comboBox)
+        private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            return comboBox.Items.Cast<string>();
+            var userInput = ((ComboBox)sender).Text;
+            if (string.IsNullOrEmpty(userInput))
+            {
+                return;
+            }
+            ComboBoxAutoComplete.AutoComplete(userInput, (ComboBox)sender);
         }
     }
 }
