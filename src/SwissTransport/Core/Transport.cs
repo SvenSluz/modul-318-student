@@ -12,6 +12,25 @@
 
         private readonly HttpClient httpClient = new HttpClient();
 
+        public async Task<Connections> GetConnectionWithTime(string date, string time, string fromStation, string toStation)
+        {
+            if (string.IsNullOrEmpty(fromStation))
+            {
+                throw new ArgumentNullException(nameof(fromStation));
+            }
+
+            if (string.IsNullOrEmpty(toStation))
+            {
+                throw new ArgumentNullException(nameof(toStation));
+            }
+
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&date={date}&time={time}");
+
+            return await this.GetObjectAsync<Connections>(uri)
+                .ConfigureAwait(false);
+
+        }
+
         public async Task<Stations> GetStationsAsync(string query)
         {
             if (string.IsNullOrEmpty(query))

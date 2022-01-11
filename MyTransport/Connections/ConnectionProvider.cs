@@ -15,7 +15,7 @@ namespace MyTransport.Connections
             _transport = new Transport();
         }
 
-        internal Task<List<Tuple<string, string>>> GetSimilarStationsAsync(string input)
+        internal Task<List<Tuple<string, string>>> GetSimilarStations(string input)
         {
             try
             {
@@ -35,6 +35,25 @@ namespace MyTransport.Connections
             return Task.Run(()=>_transport.GetConnectionsAsync(departureStation, targetDestination)).GetAwaiter().GetResult();
         }
 
-  
+
+        public StationBoardRoot GetStationBoard(string name, string id)
+        {
+            return Task.Run(() => _transport.GetStationBoardAsync(name, id)).GetAwaiter().GetResult();
+        }
+
+        public string GetId(string text)
+        {
+            return GetSimilarStations(text).Result.First().Item2;
+        }
+
+        public SwissTransport.Models.Connections GetConnectionsWithTimeAndDate(string date, string time, string fromStation, string toStation)
+        {
+            var formattedDate = Convert.ToDateTime(date).ToString("yyyy-MM-dd");
+            var formattedTime = Convert.ToDateTime(time).ToString("HH:mm");
+            
+
+            var connections = Task.Run(()=>_transport.GetConnectionWithTime(formattedDate, formattedTime, fromStation, toStation)).GetAwaiter().GetResult();
+            return connections;
+        }
     } 
 }
