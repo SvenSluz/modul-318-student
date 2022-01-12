@@ -1,4 +1,6 @@
-﻿using SwissTransport.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using SwissTransport.Models;
 
 namespace MyTransport.Connections
 {
@@ -29,7 +31,7 @@ namespace MyTransport.Connections
             await Task.Factory.StartNew(() => LongWork(date, time, fromStation, toStation), TaskCreationOptions.LongRunning);
 
             dataGridViewConnectionTable.Rows.Clear();
-            AddConnectionsToDataGrid();
+            AddConnectionsToDataGrid(_connections);
         }
 
         private void LongWork(string date, string time, string fromStation, string toStation)
@@ -37,9 +39,9 @@ namespace MyTransport.Connections
             LoadConnections(date, time, fromStation, toStation);
         }
 
-        private void AddConnectionsToDataGrid()
+        private void AddConnectionsToDataGrid(List<Connection?> connections)
         {
-            foreach (var con in _connections)
+            foreach (var con in connections)
             {
                 var delay = con.From.Delay.ToString();
                 dataGridViewConnectionTable.Rows.Add(
@@ -79,6 +81,32 @@ namespace MyTransport.Connections
             _suggestedStationsList = new DataProvider().GetSimilarStations(userInput)?.Result;
         }
 
+        private void buttonMoreConnections_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewConnectionTable.Rows.Count==0)
+            {
+                return;
+            }
 
+            var date = DateTimePickerDeparture.Text;
+            var stationFrom = _connections.First().From.Station.Name;
+            var stationTo = _connections.First().To.Station.Name;
+            DateTime? depart = GetLastDepartureTimeInConnections();
+
+            var additionalConnections = _dataProvider.GetConnectionsWithTimeAndDate(date,((DateTime)depart).ToString("HH:mm"),stationFrom,stationTo).ConnectionList;
+            AddConnectionsToDataGrid(additionalConnections);
+            _connections.AddRange(additionalConnections);
+        }
+
+        private DateTime? GetLastDepartureTimeInConnections()
+        {
+            DateTime? depart = DateTime.Now;
+            foreach (var con in _connections)
+            {
+                depart = ((DateTime) con.From.Departure).AddMinutes(1);
+            }
+
+            return depart;
+        }
     }
 }

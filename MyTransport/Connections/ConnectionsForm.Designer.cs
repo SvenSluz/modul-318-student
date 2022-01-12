@@ -42,6 +42,7 @@
             this.buttonSearch = new System.Windows.Forms.Button();
             this.comboBoxArrivalStation = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelVerbindungen = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonMoreConnections = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConnectionTable)).BeginInit();
             this.tableLayoutPanelVerbindungen.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +61,7 @@
             // 
             this.timePicker.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.timePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timePicker.Location = new System.Drawing.Point(701, 189);
+            this.timePicker.Location = new System.Drawing.Point(701, 174);
             this.timePicker.Name = "timePicker";
             this.timePicker.ShowUpDown = true;
             this.timePicker.Size = new System.Drawing.Size(500, 47);
@@ -69,7 +70,7 @@
             // DateTimePickerDeparture
             // 
             this.DateTimePickerDeparture.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.DateTimePickerDeparture.Location = new System.Drawing.Point(69, 189);
+            this.DateTimePickerDeparture.Location = new System.Drawing.Point(69, 174);
             this.DateTimePickerDeparture.Name = "DateTimePickerDeparture";
             this.DateTimePickerDeparture.ShowUpDown = true;
             this.DateTimePickerDeparture.Size = new System.Drawing.Size(495, 47);
@@ -81,7 +82,7 @@
             this.comboBoxDepartureStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBoxDepartureStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxDepartureStation.FormattingEnabled = true;
-            this.comboBoxDepartureStation.Location = new System.Drawing.Point(90, 68);
+            this.comboBoxDepartureStation.Location = new System.Drawing.Point(90, 61);
             this.comboBoxDepartureStation.Name = "comboBoxDepartureStation";
             this.comboBoxDepartureStation.Size = new System.Drawing.Size(454, 49);
             this.comboBoxDepartureStation.TabIndex = 0;
@@ -102,7 +103,7 @@
             this.Departure,
             this.Ankunft});
             this.tableLayoutPanelVerbindungen.SetColumnSpan(this.dataGridViewConnectionTable, 3);
-            this.dataGridViewConnectionTable.Location = new System.Drawing.Point(191, 375);
+            this.dataGridViewConnectionTable.Location = new System.Drawing.Point(191, 345);
             this.dataGridViewConnectionTable.Name = "dataGridViewConnectionTable";
             this.dataGridViewConnectionTable.ReadOnly = true;
             this.dataGridViewConnectionTable.RowHeadersVisible = false;
@@ -151,7 +152,7 @@
             // buttonSearch
             // 
             this.buttonSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonSearch.Location = new System.Drawing.Point(1474, 64);
+            this.buttonSearch.Location = new System.Drawing.Point(1474, 56);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(223, 58);
             this.buttonSearch.TabIndex = 2;
@@ -166,7 +167,7 @@
             this.comboBoxArrivalStation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBoxArrivalStation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxArrivalStation.FormattingEnabled = true;
-            this.comboBoxArrivalStation.Location = new System.Drawing.Point(723, 68);
+            this.comboBoxArrivalStation.Location = new System.Drawing.Point(723, 61);
             this.comboBoxArrivalStation.Name = "comboBoxArrivalStation";
             this.comboBoxArrivalStation.Size = new System.Drawing.Size(455, 49);
             this.comboBoxArrivalStation.TabIndex = 1;
@@ -176,25 +177,37 @@
             // 
             this.tableLayoutPanelVerbindungen.AutoSize = true;
             this.tableLayoutPanelVerbindungen.ColumnCount = 3;
-            this.tableLayoutPanelVerbindungen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelVerbindungen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
             this.tableLayoutPanelVerbindungen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanelVerbindungen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanelVerbindungen.Controls.Add(this.comboBoxArrivalStation, 1, 0);
             this.tableLayoutPanelVerbindungen.Controls.Add(this.buttonSearch, 2, 0);
-            this.tableLayoutPanelVerbindungen.Controls.Add(this.dataGridViewConnectionTable, 0, 2);
             this.tableLayoutPanelVerbindungen.Controls.Add(this.comboBoxDepartureStation, 0, 0);
             this.tableLayoutPanelVerbindungen.Controls.Add(this.DateTimePickerDeparture, 0, 1);
             this.tableLayoutPanelVerbindungen.Controls.Add(this.timePicker, 1, 1);
+            this.tableLayoutPanelVerbindungen.Controls.Add(this.dataGridViewConnectionTable, 2, 1);
+            this.tableLayoutPanelVerbindungen.Controls.Add(this.buttonMoreConnections, 1, 4);
             this.tableLayoutPanelVerbindungen.Location = new System.Drawing.Point(12, 140);
             this.tableLayoutPanelVerbindungen.Name = "tableLayoutPanelVerbindungen";
-            this.tableLayoutPanelVerbindungen.RowCount = 4;
-            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.75F));
-            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.75F));
-            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.25F));
-            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.25F));
-            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelVerbindungen.RowCount = 5;
+            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.24138F));
+            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.24138F));
+            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.73563F));
+            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.3908F));
+            this.tableLayoutPanelVerbindungen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.3908F));
             this.tableLayoutPanelVerbindungen.Size = new System.Drawing.Size(1903, 992);
             this.tableLayoutPanelVerbindungen.TabIndex = 2;
+            // 
+            // buttonMoreConnections
+            // 
+            this.buttonMoreConnections.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonMoreConnections.Location = new System.Drawing.Point(703, 871);
+            this.buttonMoreConnections.Name = "buttonMoreConnections";
+            this.buttonMoreConnections.Size = new System.Drawing.Size(495, 58);
+            this.buttonMoreConnections.TabIndex = 9;
+            this.buttonMoreConnections.Text = "Weitere Verbindungen suchen";
+            this.buttonMoreConnections.UseVisualStyleBackColor = true;
+            this.buttonMoreConnections.Click += new System.EventHandler(this.buttonMoreConnections_Click);
             // 
             // ConnectionsForm
             // 
@@ -229,5 +242,6 @@
         private TableLayoutPanel tableLayoutPanelVerbindungen;
         private ComboBox comboBoxArrivalStation;
         private Button buttonSearch;
+        private Button buttonMoreConnections;
     }
 }
