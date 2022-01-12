@@ -1,16 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Forms;
-using MyTransport.Station;
-using SwissTransport.Core;
-using SwissTransport.Models;
+﻿using SwissTransport.Models;
 
 namespace MyTransport.Connections
 {
     public partial class ConnectionsForm : Form 
     {
         private readonly DataProvider _dataProvider;
+        private List<Connection?> _connections = new List<Connection?>();
+        private List<string>? _suggestedStationsList = new List<string>();
         public ConnectionsForm()
         {
             InitializeComponent();
@@ -18,20 +14,39 @@ namespace MyTransport.Connections
             DateTimePickerDeparture.Text = DateTime.Now.ToShortDateString();
             timePicker.Format = DateTimePickerFormat.Custom;
             timePicker.CustomFormat = "HH:mm";
-
-
         }
 
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
-            var connections = _dataProvider.GetConnectionsWithTimeAndDate(DateTimePickerDeparture.Text,timePicker.Text, comboBoxDepartureStation.Text, comboBoxArrivalStation.Text);
             dataGridViewConnectionTable.Rows.Clear();
-            foreach (var con in connections.ConnectionList)
+            var date = DateTimePickerDeparture.Text;
+            var time = timePicker.Text;
+            var fromStation = comboBoxDepartureStation.Text;
+            var toStation = comboBoxArrivalStation.Text;
+            var callThread = new Thread(new ThreadStart(()=>LoadConnections(date,time,fromStation,toStation)));
+            callThread.Start();
+            
+            BeginInvoke(new Action(AddConnectionsToDataGrid));
+        }
+
+        private void AddConnectionsToDataGrid()
+        {
+            foreach (var con in _connections)
             {
                 var delay = con.From.Delay.ToString();
-                dataGridViewConnectionTable.Rows.Add(con.From.Station.Name, con.From.Platform, con.To.Station.Name, $"{((DateTime)con.From.Departure).ToShortTimeString()} +{delay}'" ,((DateTime)con.To.Arrival).ToShortTimeString());
+                dataGridViewConnectionTable.Rows.Add(
+                    con.From.Station.Name,
+                    con.From.Platform, con.To.Station.Name,
+                    $"{((DateTime) con.From.Departure).ToShortTimeString()} +{(string.IsNullOrEmpty(delay)?0:delay)}'",
+                    ((DateTime) con.To.Arrival).ToShortTimeString());
             }
         }
+
+        private void LoadConnections(string date, string time, string fromStation, string toStation)
+        {
+            _connections = _dataProvider.GetConnectionsWithTimeAndDate(date,time,fromStation,toStation).ConnectionList;
+        }
+
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -40,7 +55,22 @@ namespace MyTransport.Connections
             {
                 return;
             }
-            ComboBoxAutoComplete.AutoComplete(userInput, (ComboBox)sender);
+
+            var callThread = new Thread(new ThreadStart(() => LoadSuggestedStations(userInput)));
+            callThread.Start();
+            if (_suggestedStationsList != null && !_suggestedStationsList.Any())
+            {
+                return;
+            }
+
+            BeginInvoke(() => ComboBoxAutoComplete.HandleAutoComplete(((ComboBox)sender), _suggestedStationsList));
         }
+
+        private void LoadSuggestedStations(string userInput)
+        {
+            _suggestedStationsList = new DataProvider().GetSimilarStations(userInput)?.Result;
+        }
+
+
     }
 }

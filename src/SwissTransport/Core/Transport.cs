@@ -28,7 +28,24 @@
 
             return await this.GetObjectAsync<Connections>(uri)
                 .ConfigureAwait(false);
+        }
 
+        public async Task<Connections> GetSingleConnectionWithDateTimeAsync(string date, string time, string fromStation, string toStation)
+        {
+            if (string.IsNullOrEmpty(fromStation))
+            {
+                throw new ArgumentNullException(nameof(fromStation));
+            }
+
+            if (string.IsNullOrEmpty(toStation))
+            {
+                throw new ArgumentNullException(nameof(toStation));
+            }
+
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&date={date}&time={time}&limit=1");
+
+            return await this.GetObjectAsync<Connections>(uri)
+                .ConfigureAwait(false);
         }
 
         public async Task<Stations> GetStationsAsync(string query)

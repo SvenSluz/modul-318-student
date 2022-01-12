@@ -5,9 +5,9 @@ using Xunit;
 
 namespace MyTransportTest
 {
-    internal class ConnectionProviderTest
+    internal class DataProviderTest
     {
-        public ConnectionProviderTest()
+        public DataProviderTest()
         {
             _dataProvider = new DataProvider();
         }
@@ -49,7 +49,22 @@ namespace MyTransportTest
         public void GetSimilarStationsWithNullReturnTest()
         {
             var stations = _dataProvider.GetSimilarStations("Safjdkl")?.Result;
-            stations.Should().BeNull();
+            stations.Should().HaveCount(0);
         }
+        [Test]
+        public void GetConnectionWithDateAndTimeTest()
+        {
+            var stations = _dataProvider.GetConnectionsWithTimeAndDate("2022-01-01", "15:00", "Sursee", "Luzern");
+            stations.Should().NotBeNull();
+        }
+        [Test]
+        public void GetSingleConnectionTest()
+        {
+            var stations = _dataProvider.GetSingleConnection("2022-01-01", "15:00", "Sursee", "Luzern");
+            stations.Should().NotBeNull();
+        }
+
+
+
     }
 }

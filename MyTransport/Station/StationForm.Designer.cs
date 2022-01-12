@@ -37,12 +37,17 @@
             this.labelTitel = new System.Windows.Forms.Label();
             this.buttonLoadStationTable = new System.Windows.Forms.Button();
             this.labelHeader = new System.Windows.Forms.Label();
+            this.loadingLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStationTable)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewStationTable
             // 
+            this.dataGridViewStationTable.AllowUserToAddRows = false;
+            this.dataGridViewStationTable.AllowUserToDeleteRows = false;
             this.dataGridViewStationTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewStationTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewStationTable.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.dataGridViewStationTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStationTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnLine,
@@ -51,6 +56,8 @@
             this.direction});
             this.dataGridViewStationTable.Location = new System.Drawing.Point(176, 348);
             this.dataGridViewStationTable.Name = "dataGridViewStationTable";
+            this.dataGridViewStationTable.ReadOnly = true;
+            this.dataGridViewStationTable.RowHeadersVisible = false;
             this.dataGridViewStationTable.RowHeadersWidth = 102;
             this.dataGridViewStationTable.RowTemplate.Height = 49;
             this.dataGridViewStationTable.Size = new System.Drawing.Size(1377, 819);
@@ -61,18 +68,21 @@
             this.columnLine.HeaderText = "Linie";
             this.columnLine.MinimumWidth = 12;
             this.columnLine.Name = "columnLine";
+            this.columnLine.ReadOnly = true;
             // 
             // Departure
             // 
             this.Departure.HeaderText = "Abfahrt";
             this.Departure.MinimumWidth = 12;
             this.Departure.Name = "Departure";
+            this.Departure.ReadOnly = true;
             // 
             // Duration
             // 
             this.Duration.HeaderText = "Dauer";
             this.Duration.MinimumWidth = 12;
             this.Duration.Name = "Duration";
+            this.Duration.ReadOnly = true;
             // 
             // direction
             // 
@@ -116,10 +126,19 @@
             // labelHeader
             // 
             this.labelHeader.AutoSize = true;
-            this.labelHeader.Location = new System.Drawing.Point(176, 153);
+            this.labelHeader.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelHeader.Location = new System.Drawing.Point(176, 145);
             this.labelHeader.Name = "labelHeader";
-            this.labelHeader.Size = new System.Drawing.Size(0, 41);
+            this.labelHeader.Size = new System.Drawing.Size(0, 54);
             this.labelHeader.TabIndex = 4;
+            // 
+            // loadingLabel
+            // 
+            this.loadingLabel.AutoSize = true;
+            this.loadingLabel.Location = new System.Drawing.Point(176, 1212);
+            this.loadingLabel.Name = "loadingLabel";
+            this.loadingLabel.Size = new System.Drawing.Size(0, 41);
+            this.loadingLabel.TabIndex = 5;
             // 
             // StationForm
             // 
@@ -127,6 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1949, 1363);
             this.ControlBox = false;
+            this.Controls.Add(this.loadingLabel);
             this.Controls.Add(this.labelHeader);
             this.Controls.Add(this.buttonLoadStationTable);
             this.Controls.Add(this.labelTitel);
@@ -152,5 +172,6 @@
         private DataGridViewTextBoxColumn Departure;
         private DataGridViewTextBoxColumn Duration;
         private DataGridViewTextBoxColumn direction;
+        private Label loadingLabel;
     }
 }

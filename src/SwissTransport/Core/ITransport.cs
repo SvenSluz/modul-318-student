@@ -18,5 +18,7 @@
         Connections GetConnections(string fromStation, string toStation);
 
         Task<Connections> GetConnectionWithTime(string date, string time, string fromStation, string toStation);
+
+        Task<Connections> GetSingleConnectionWithDateTimeAsync(string date, string time, string fromStation, string toStation);
     }
 }

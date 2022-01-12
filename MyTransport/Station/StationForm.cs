@@ -1,4 +1,7 @@
-﻿namespace MyTransport.Station
+﻿using System.Globalization;
+using SwissTransport.Models;
+
+namespace MyTransport.Station
 {
     public partial class StationForm : Form
     {
@@ -9,34 +12,108 @@
         }
 
         private readonly DataProvider _dataProvider;
-
-        private void buttonLoadStationTable_Click(object sender, EventArgs e)
+        private StationBoardRoot _boardTable = new StationBoardRoot();
+        private List<string> _durationTimes = new List<string>();
+        private async void buttonLoadStationTable_Click(object sender, EventArgs e)
         {
-            _dataProvider.GetId(comboBoxStations.Text);
-            labelHeader.Text = comboBoxStations.Text;
+            buttonLoadStationTable.Enabled = false;
+            var stationName = comboBoxStations.Text;
+            var progress = new Progress<string>(s => loadingLabel.Text = s);
+            await Task.Factory.StartNew(()=> LongWork(progress, stationName) , TaskCreationOptions.LongRunning);
 
-            var boardTable = _dataProvider.GetStationBoard(comboBoxStations.Text, _dataProvider.GetId(comboBoxStations.Text));
-            foreach (var boardEntry in boardTable.Entries)
-            {
-                var connection = _dataProvider.GetConnections(comboBoxStations.Text, boardEntry.To);
-                dataGridViewStationTable.Rows.Add(boardEntry.Category+ boardEntry.Number, ((DateTime)boardEntry.Stop.Departure).ToShortTimeString(), boardEntry.To);
-            }
+            labelHeader.Text = stationName;
+            dataGridViewStationTable.BeginInvoke(ApplyDataToDataGrid);
+            buttonLoadStationTable.Enabled = false;
+            loadingLabel.Text = "fertig";
+        }
 
+        public void LongWork(IProgress<string> progress, string stationName)
+        {
+            progress.Report("laden...");
+            GetStationData(stationName);
+
+        }
+
+        private Task GetStationData(string stationName)
+        {
+            LoadStations(stationName).GetAwaiter();
+            _durationTimes = GetDurationTimes(stationName) as List<string>;
+            return Task.CompletedTask;
+        }
+
+        private Task ApplyDataToDataGrid()
+        {
+            AddEntriesToDataGrid(_boardTable);
+            AddDurationTimes(_boardTable.Entries, dataGridViewStationTable.Rows).ConfigureAwait(false);
+            return Task.CompletedTask;
+        }
+
+        private List<string?> GetDurationTimes(string stationName)
+        {
+            return _boardTable.Entries
+                .Select(boardEntry => _dataProvider.GetSingleConnection(boardEntry.Stop.Departure.ToString(CultureInfo.CurrentCulture),
+                    boardEntry.Stop.Departure.ToString("HH:mm"),
+                    stationName, boardEntry.To)?.Duration).ToList();
         }
 
         private void comboBoxStations_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var userInput = ((ComboBox)sender).Text;
+            var userInput= ((ComboBox) sender).Text;
             if (string.IsNullOrEmpty(userInput))
             {
                 return;
             }
-            ComboBoxAutoComplete.AutoComplete(userInput, (ComboBox)sender);
+
+            var callThread = new Thread(new ThreadStart(() => LoadSuggestedStations(userInput)));
+            callThread.Start();
+            if (SuggestedStationsList != null && !SuggestedStationsList.Any())
+            {
+                return;
+            }
+
+            BeginInvoke(()=> ComboBoxAutoComplete.HandleAutoComplete(((ComboBox)sender), SuggestedStationsList));
         }
 
-        private void comboBoxStations_TextChanged(object sender, EventArgs e)
+        public List<string>? SuggestedStationsList = new List<string>();
+
+
+        private void LoadSuggestedStations(string userInput)
         {
-
+            SuggestedStationsList = _dataProvider.GetSimilarStations(userInput)?.Result;
         }
+
+        private Task LoadStations(string stationName)
+        {
+            _dataProvider.GetId(stationName);
+            _boardTable = _dataProvider.GetStationBoard(stationName, _dataProvider.GetId(stationName));
+            return Task.CompletedTask;
+        }
+
+        private Task AddEntriesToDataGrid(StationBoardRoot boardTable)
+        {
+            dataGridViewStationTable.Rows.Clear();
+            foreach (var boardEntry in boardTable.Entries)
+            {
+                dataGridViewStationTable.Rows.Add(boardEntry.Category + boardEntry.Number,
+                    ((DateTime)boardEntry.Stop.Departure).ToShortTimeString(), "", boardEntry.To);
+            }
+            return Task.CompletedTask;
+        }
+
+        private Task AddDurationTimes(List<StationBoard> boardTable,DataGridViewRowCollection rows)
+        {
+            var rowIndex = 0;
+            foreach (var boardEntry in boardTable)
+            {
+                rows[rowIndex].Cells[2].Value= _durationTimes[rowIndex];
+                rowIndex++;
+            }
+            return Task.CompletedTask;
+        }
+    }
+
+    internal class SecondThreadConcern
+    {
+
     }
 }

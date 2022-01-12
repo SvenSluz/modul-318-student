@@ -103,6 +103,7 @@
             this.buttonSearch.Text = "Suche";
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
+            this.buttonSearch.Enter += new System.EventHandler(this.ButtonSearch_Click);
             // 
             // dataGridViewConnectionTable
             // 

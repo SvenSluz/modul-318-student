@@ -7,5 +7,6 @@ namespace SwissTransport.Models
     {
         [JsonProperty("departure")]
         public DateTime Departure { get; set; }
+
     }
 }
