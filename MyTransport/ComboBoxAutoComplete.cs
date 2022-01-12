@@ -1,6 +1,4 @@
-﻿using MyTransport.Station;
-
-namespace MyTransport;
+﻿namespace MyTransport;
 
 public static class ComboBoxAutoComplete
 {

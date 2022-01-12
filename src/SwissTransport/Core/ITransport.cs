@@ -1,7 +1,7 @@
 ﻿namespace SwissTransport.Core
 {
-    using System.Threading.Tasks;
     using SwissTransport.Models;
+    using System.Threading.Tasks;
 
     public interface ITransport
     {

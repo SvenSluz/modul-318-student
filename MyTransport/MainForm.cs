@@ -1,5 +1,4 @@
 using MyTransport.Station;
-using SwissTransport.Core;
 
 namespace MyTransport
 {
@@ -20,7 +19,7 @@ namespace MyTransport
             splitContainer1.Panel2.Controls.Clear();
             splitContainer1.Panel2.Controls.Add(ConnectionForm);
             ConnectionForm.Show();
-            
+
         }
 
         private void OpenStationForm_Click(object sender, EventArgs e)

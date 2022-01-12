@@ -2,7 +2,7 @@
 
 namespace MyTransport.Connections
 {
-    public partial class ConnectionsForm : Form 
+    public partial class ConnectionsForm : Form
     {
         private readonly DataProvider _dataProvider;
         private List<Connection?> _connections = new List<Connection?>();
@@ -23,9 +23,9 @@ namespace MyTransport.Connections
             var time = timePicker.Text;
             var fromStation = comboBoxDepartureStation.Text;
             var toStation = comboBoxArrivalStation.Text;
-            var callThread = new Thread(new ThreadStart(()=>LoadConnections(date,time,fromStation,toStation)));
+            var callThread = new Thread(new ThreadStart(() => LoadConnections(date, time, fromStation, toStation)));
             callThread.Start();
-            
+
             BeginInvoke(new Action(AddConnectionsToDataGrid));
         }
 
@@ -37,14 +37,14 @@ namespace MyTransport.Connections
                 dataGridViewConnectionTable.Rows.Add(
                     con.From.Station.Name,
                     con.From.Platform, con.To.Station.Name,
-                    $"{((DateTime) con.From.Departure).ToShortTimeString()} +{(string.IsNullOrEmpty(delay)?0:delay)}'",
-                    ((DateTime) con.To.Arrival).ToShortTimeString());
+                    $"{((DateTime)con.From.Departure).ToShortTimeString()} +{(string.IsNullOrEmpty(delay) ? 0 : delay)}'",
+                    ((DateTime)con.To.Arrival).ToShortTimeString());
             }
         }
 
         private void LoadConnections(string date, string time, string fromStation, string toStation)
         {
-            _connections = _dataProvider.GetConnectionsWithTimeAndDate(date,time,fromStation,toStation).ConnectionList;
+            _connections = _dataProvider.GetConnectionsWithTimeAndDate(date, time, fromStation, toStation).ConnectionList;
         }
 
 

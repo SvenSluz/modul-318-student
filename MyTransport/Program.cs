@@ -1,5 +1,3 @@
-using System;
-
 namespace MyTransport
 {
     internal static class Program

@@ -1,5 +1,3 @@
-using System;
-
 namespace SwissTransport.Models
 {
     using Newtonsoft.Json;

@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using MyTransport;
 using NUnit.Framework;
-using Xunit;
 
 namespace MyTransportTest
 {
@@ -17,7 +16,7 @@ namespace MyTransportTest
         [Test]
         public void ConnectionsWithTimeAndDateTest()
         {
-            var connections =  _dataProvider.GetConnectionsWithTimeAndDate("2015-01-01", "15:30", "Sursee", "Luzern");
+            var connections = _dataProvider.GetConnectionsWithTimeAndDate("2015-01-01", "15:30", "Sursee", "Luzern");
 
             connections.Should().NotBeNull();
         }

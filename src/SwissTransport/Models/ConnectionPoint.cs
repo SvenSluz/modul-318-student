@@ -1,7 +1,7 @@
 namespace SwissTransport.Models
 {
-    using System;
     using Newtonsoft.Json;
+    using System;
 
     public class ConnectionPoint
     {

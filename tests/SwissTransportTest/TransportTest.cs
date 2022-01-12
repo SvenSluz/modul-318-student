@@ -1,9 +1,9 @@
 ﻿namespace SwissTransport
 {
-    using System.Threading.Tasks;
     using FluentAssertions;
     using SwissTransport.Core;
     using SwissTransport.Models;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class TransportTest
@@ -66,7 +66,7 @@
         [Fact]
         public async Task ConnectionsWithTimeAndDate()
         {
-            Connections connections = await this.testee.GetConnectionWithTime("2022-01-01", "15:00","Sursee", "Luzern");
+            Connections connections = await this.testee.GetConnectionWithTime("2022-01-01", "15:00", "Sursee", "Luzern");
 
             connections.Should().NotBeNull();
         }

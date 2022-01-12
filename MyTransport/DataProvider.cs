@@ -19,7 +19,7 @@ namespace MyTransport
 
         public SwissTransport.Models.Connections GetConnections(string departureStation, string targetDestination)
         {
-            return Task.Run(()=>_transport.GetConnectionsAsync(departureStation, targetDestination)).GetAwaiter().GetResult();
+            return Task.Run(() => _transport.GetConnectionsAsync(departureStation, targetDestination)).GetAwaiter().GetResult();
         }
 
 
@@ -30,7 +30,7 @@ namespace MyTransport
 
         public string GetId(string text)
         {
-            var  stations = _transport.GetStationsAsync(text).GetAwaiter().GetResult();
+            var stations = _transport.GetStationsAsync(text).GetAwaiter().GetResult();
             return stations.StationList[0].Id;
         }
 
@@ -39,7 +39,7 @@ namespace MyTransport
             var formattedDate = Convert.ToDateTime(date).ToString("yyyy-MM-dd");
             var formattedTime = Convert.ToDateTime(time).ToString("HH:mm");
 
-            var connections = Task.Run(()=>_transport.GetConnectionWithTime(formattedDate, formattedTime, fromStation, toStation)).GetAwaiter().GetResult();
+            var connections = Task.Run(() => _transport.GetConnectionWithTime(formattedDate, formattedTime, fromStation, toStation)).GetAwaiter().GetResult();
             return connections;
         }
 
@@ -52,5 +52,5 @@ namespace MyTransport
             return connection.ConnectionList.FirstOrDefault();
 
         }
-    } 
+    }
 }

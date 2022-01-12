@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-using SwissTransport.Models;
+﻿using SwissTransport.Models;
+using System.Globalization;
 
 namespace MyTransport.Station
 {
@@ -19,7 +19,7 @@ namespace MyTransport.Station
             buttonLoadStationTable.Enabled = false;
             var stationName = comboBoxStations.Text;
             var progress = new Progress<string>(s => loadingLabel.Text = s);
-            await Task.Factory.StartNew(()=> LongWork(progress, stationName) , TaskCreationOptions.LongRunning);
+            await Task.Factory.StartNew(() => LongWork(progress, stationName), TaskCreationOptions.LongRunning);
 
             labelHeader.Text = stationName;
             dataGridViewStationTable.BeginInvoke(ApplyDataToDataGrid);
@@ -27,7 +27,7 @@ namespace MyTransport.Station
             loadingLabel.Text = "fertig";
         }
 
-        public void LongWork(IProgress<string> progress, string stationName)
+        private void LongWork(IProgress<string> progress, string stationName)
         {
             progress.Report("laden...");
             GetStationData(stationName);
@@ -58,7 +58,7 @@ namespace MyTransport.Station
 
         private void comboBoxStations_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var userInput= ((ComboBox) sender).Text;
+            var userInput = ((ComboBox)sender).Text;
             if (string.IsNullOrEmpty(userInput))
             {
                 return;
@@ -71,7 +71,7 @@ namespace MyTransport.Station
                 return;
             }
 
-            BeginInvoke(()=> ComboBoxAutoComplete.HandleAutoComplete(((ComboBox)sender), SuggestedStationsList));
+            BeginInvoke(() => ComboBoxAutoComplete.HandleAutoComplete(((ComboBox)sender), SuggestedStationsList));
         }
 
         public List<string>? SuggestedStationsList = new List<string>();
@@ -100,20 +100,15 @@ namespace MyTransport.Station
             return Task.CompletedTask;
         }
 
-        private Task AddDurationTimes(List<StationBoard> boardTable,DataGridViewRowCollection rows)
+        private Task AddDurationTimes(List<StationBoard> boardTable, DataGridViewRowCollection rows)
         {
             var rowIndex = 0;
             foreach (var boardEntry in boardTable)
             {
-                rows[rowIndex].Cells[2].Value= _durationTimes[rowIndex];
+                rows[rowIndex].Cells[2].Value = _durationTimes[rowIndex];
                 rowIndex++;
             }
             return Task.CompletedTask;
         }
-    }
-
-    internal class SecondThreadConcern
-    {
-
     }
 }
