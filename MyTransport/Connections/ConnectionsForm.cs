@@ -16,21 +16,25 @@ namespace MyTransport.Connections
             timePicker.CustomFormat = "HH:mm";
         }
 
-        private void ButtonSearch_Click(object sender, EventArgs e)
+        private async void ButtonSearch_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(comboBoxArrivalStation.Text) || string.IsNullOrWhiteSpace(comboBoxArrivalStation.Text))
+            if (string.IsNullOrWhiteSpace(comboBoxDepartureStation.Text) || string.IsNullOrWhiteSpace(comboBoxArrivalStation.Text))
             {
                 return;
             }
-            dataGridViewConnectionTable.Rows.Clear();
             var date = DateTimePickerDeparture.Text;
             var time = timePicker.Text;
             var fromStation = comboBoxDepartureStation.Text;
             var toStation = comboBoxArrivalStation.Text;
-            var callThread = new Thread(new ThreadStart(() => LoadConnections(date, time, fromStation, toStation)));
-            callThread.Start();
+            await Task.Factory.StartNew(() => LongWork(date, time, fromStation, toStation), TaskCreationOptions.LongRunning);
 
-            BeginInvoke(new Action(AddConnectionsToDataGrid));
+            dataGridViewConnectionTable.Rows.Clear();
+            AddConnectionsToDataGrid();
+        }
+
+        private void LongWork(string date, string time, string fromStation, string toStation)
+        {
+            LoadConnections(date, time, fromStation, toStation);
         }
 
         private void AddConnectionsToDataGrid()
@@ -53,7 +57,7 @@ namespace MyTransport.Connections
 
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
-          {
+        {
             var userInput = ((ComboBox)sender).Text;
             if (string.IsNullOrEmpty(userInput))
             {

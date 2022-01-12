@@ -48,6 +48,11 @@
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.splitContainer1.Panel1.Controls.Add(this.OpenStationForm);
             this.splitContainer1.Panel1.Controls.Add(this.OpenConnectionForm);
+            this.splitContainer1.Panel1.Cursor = System.Windows.Forms.Cursors.Default;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer1.Size = new System.Drawing.Size(2267, 1278);
             this.splitContainer1.SplitterDistance = 270;
             this.splitContainer1.TabIndex = 0;

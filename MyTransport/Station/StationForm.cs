@@ -14,6 +14,7 @@ namespace MyTransport.Station
         private readonly DataProvider _dataProvider;
         private StationBoardRoot _boardTable = new StationBoardRoot();
         private List<string> _durationTimes = new List<string>();
+
         private async void buttonLoadStationTable_Click(object sender, EventArgs e)
         {
             buttonLoadStationTable.Enabled = false;
