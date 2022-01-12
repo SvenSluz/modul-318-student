@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using SwissTransport.Models;
+﻿using SwissTransport.Models;
 
 namespace MyTransport.Connections
 {
@@ -54,7 +52,7 @@ namespace MyTransport.Connections
 
         private void LoadConnections(string date, string time, string fromStation, string toStation)
         {
-            _connections = _dataProvider.GetConnectionsWithTimeAndDate(date, time, fromStation, toStation).ConnectionList;
+            _connections = _dataProvider.GetFourConnectionsWithTimeAndDate(date, time, fromStation, toStation).ConnectionList;
         }
 
 
@@ -93,7 +91,7 @@ namespace MyTransport.Connections
             var stationTo = _connections.First().To.Station.Name;
             DateTime? depart = GetLastDepartureTimeInConnections();
 
-            var additionalConnections = _dataProvider.GetConnectionsWithTimeAndDate(date,((DateTime)depart).ToString("HH:mm"),stationFrom,stationTo).ConnectionList;
+            var additionalConnections = _dataProvider.GetFourConnectionsWithTimeAndDate(date,((DateTime)depart).ToString("HH:mm"),stationFrom,stationTo).ConnectionList;
             AddConnectionsToDataGrid(additionalConnections);
             _connections.AddRange(additionalConnections);
         }

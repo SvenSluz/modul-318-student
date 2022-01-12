@@ -16,7 +16,7 @@ namespace MyTransportTest
         [Test]
         public void ConnectionsWithTimeAndDateTest()
         {
-            var connections = _dataProvider.GetConnectionsWithTimeAndDate("2015-01-01", "15:30", "Sursee", "Luzern");
+            var connections = _dataProvider.GetFourConnectionsWithTimeAndDate("2015-01-01", "15:30", "Sursee", "Luzern");
 
             connections.Should().NotBeNull();
         }
@@ -33,12 +33,6 @@ namespace MyTransportTest
             stationBoard.Should().NotBeNull();
         }
         [Test]
-        public void GetConnectionsTest()
-        {
-            var connections = _dataProvider.GetConnections("Luzern", "Sursee");
-            connections.Should().NotBeNull();
-        }
-        [Test]
         public void GetSimilarStationsWithReturnTest()
         {
             var stations = _dataProvider.GetSimilarStations("Sa")?.Result;
@@ -53,7 +47,7 @@ namespace MyTransportTest
         [Test]
         public void GetConnectionWithDateAndTimeTest()
         {
-            var stations = _dataProvider.GetConnectionsWithTimeAndDate("2022-01-01", "15:00", "Sursee", "Luzern");
+            var stations = _dataProvider.GetFourConnectionsWithTimeAndDate("2022-01-01", "15:00", "Sursee", "Luzern");
             stations.Should().NotBeNull();
         }
         [Test]

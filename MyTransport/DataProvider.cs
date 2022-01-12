@@ -17,12 +17,6 @@ namespace MyTransport
             return (stations == null ? null : Task.FromResult(stations.StationList.Select(s => s.Name).ToList()));
         }
 
-        public SwissTransport.Models.Connections GetConnections(string departureStation, string targetDestination)
-        {
-            return Task.Run(() => _transport.GetConnectionsAsync(departureStation, targetDestination)).GetAwaiter().GetResult();
-        }
-
-
         public StationBoardRoot GetStationBoard(string name, string id)
         {
             return Task.Run(() => _transport.GetStationBoardAsync(name, id)).GetAwaiter().GetResult();
@@ -34,12 +28,13 @@ namespace MyTransport
             return stations.StationList[0].Id;
         }
 
-        public SwissTransport.Models.Connections GetConnectionsWithTimeAndDate(string date, string time, string fromStation, string toStation)
+        public SwissTransport.Models.Connections GetFourConnectionsWithTimeAndDate(string date, string time, string fromStation, string toStation)
         {
             var formattedDate = Convert.ToDateTime(date).ToString("yyyy-MM-dd");
             var formattedTime = Convert.ToDateTime(time).ToString("HH:mm");
 
             var connections = Task.Run(() => _transport.GetConnectionWithTime(formattedDate, formattedTime, fromStation, toStation)).GetAwaiter().GetResult();
+            connections.ConnectionList = connections.ConnectionList.Take(4).ToList();
             return connections;
         }
 
