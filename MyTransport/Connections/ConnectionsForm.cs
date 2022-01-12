@@ -18,6 +18,10 @@ namespace MyTransport.Connections
 
         private void ButtonSearch_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(comboBoxArrivalStation.Text) || string.IsNullOrWhiteSpace(comboBoxArrivalStation.Text))
+            {
+                return;
+            }
             dataGridViewConnectionTable.Rows.Clear();
             var date = DateTimePickerDeparture.Text;
             var time = timePicker.Text;
@@ -49,7 +53,7 @@ namespace MyTransport.Connections
 
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
+          {
             var userInput = ((ComboBox)sender).Text;
             if (string.IsNullOrEmpty(userInput))
             {
