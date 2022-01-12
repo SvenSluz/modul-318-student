@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyTransport", "MyTransport\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyTransportTest", "MyTransportTest\MyTransportTest.csproj", "{81B945BC-B2B1-4644-BCAE-413EE5885961}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MyTransportSetup", "MyTransportSetup\MyTransportSetup.vdproj", "{C69C0115-B687-47E6-91F1-6011FA7B41D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,8 @@ Global
 		{81B945BC-B2B1-4644-BCAE-413EE5885961}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B945BC-B2B1-4644-BCAE-413EE5885961}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81B945BC-B2B1-4644-BCAE-413EE5885961}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69C0115-B687-47E6-91F1-6011FA7B41D3}.Debug|Any CPU.ActiveCfg = Debug
+		{C69C0115-B687-47E6-91F1-6011FA7B41D3}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
