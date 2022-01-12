@@ -3,6 +3,7 @@
     using SwissTransport.Models;
     using System.Threading.Tasks;
 
+
     public interface ITransport
     {
         Task<Stations> GetStationsAsync(string query);

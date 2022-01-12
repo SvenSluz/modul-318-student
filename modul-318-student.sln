@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransportTest", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyTransport", "MyTransport\MyTransport.csproj", "{2A40C4C1-525D-4CDC-BC3E-6545EEDF0E51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyTransportTest", "MyTransportTest\MyTransportTest.csproj", "{81B945BC-B2B1-4644-BCAE-413EE5885961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyTransportTest", "MyTransportTest\MyTransportTest.csproj", "{81B945BC-B2B1-4644-BCAE-413EE5885961}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

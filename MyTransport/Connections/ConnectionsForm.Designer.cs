@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConnectionsForm));
             this.labelTitel = new System.Windows.Forms.Label();
             this.timePicker = new System.Windows.Forms.DateTimePicker();
             this.DateTimePickerDeparture = new System.Windows.Forms.DateTimePicker();
             this.comboBoxDepartureStation = new System.Windows.Forms.ComboBox();
             this.dataGridViewConnectionTable = new System.Windows.Forms.DataGridView();
-            this.Ankunft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Departure = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.To = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeparturePlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.from = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeparturePlatform = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.To = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Departure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ankunft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.comboBoxArrivalStation = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelVerbindungen = new System.Windows.Forms.TableLayoutPanel();
@@ -90,7 +91,7 @@
             // 
             this.dataGridViewConnectionTable.AllowUserToAddRows = false;
             this.dataGridViewConnectionTable.AllowUserToDeleteRows = false;
-            this.dataGridViewConnectionTable.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dataGridViewConnectionTable.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataGridViewConnectionTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewConnectionTable.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.dataGridViewConnectionTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -101,34 +102,22 @@
             this.Departure,
             this.Ankunft});
             this.tableLayoutPanelVerbindungen.SetColumnSpan(this.dataGridViewConnectionTable, 3);
-            this.dataGridViewConnectionTable.Location = new System.Drawing.Point(191, 430);
+            this.dataGridViewConnectionTable.Location = new System.Drawing.Point(191, 375);
             this.dataGridViewConnectionTable.Name = "dataGridViewConnectionTable";
+            this.dataGridViewConnectionTable.ReadOnly = true;
+            this.dataGridViewConnectionTable.RowHeadersVisible = false;
             this.dataGridViewConnectionTable.RowHeadersWidth = 102;
             this.tableLayoutPanelVerbindungen.SetRowSpan(this.dataGridViewConnectionTable, 2);
-            this.dataGridViewConnectionTable.RowTemplate.Height = 49;
-            this.dataGridViewConnectionTable.Size = new System.Drawing.Size(1520, 504);
+            this.dataGridViewConnectionTable.RowTemplate.Height = 75;
+            this.dataGridViewConnectionTable.Size = new System.Drawing.Size(1520, 349);
             this.dataGridViewConnectionTable.TabIndex = 6;
             // 
-            // Ankunft
+            // from
             // 
-            this.Ankunft.HeaderText = "Arrival";
-            this.Ankunft.MinimumWidth = 12;
-            this.Ankunft.Name = "Ankunft";
-            this.Ankunft.ReadOnly = true;
-            // 
-            // Departure
-            // 
-            this.Departure.HeaderText = "Abfahrt";
-            this.Departure.MinimumWidth = 12;
-            this.Departure.Name = "Departure";
-            this.Departure.ReadOnly = true;
-            // 
-            // To
-            // 
-            this.To.HeaderText = "Bis";
-            this.To.MinimumWidth = 12;
-            this.To.Name = "To";
-            this.To.ReadOnly = true;
+            this.from.HeaderText = "Von";
+            this.from.MinimumWidth = 12;
+            this.from.Name = "from";
+            this.from.ReadOnly = true;
             // 
             // DeparturePlatform
             // 
@@ -138,12 +127,26 @@
             this.DeparturePlatform.Name = "DeparturePlatform";
             this.DeparturePlatform.ReadOnly = true;
             // 
-            // from
+            // To
             // 
-            this.from.HeaderText = "Von";
-            this.from.MinimumWidth = 12;
-            this.from.Name = "from";
-            this.from.ReadOnly = true;
+            this.To.HeaderText = "Bis";
+            this.To.MinimumWidth = 12;
+            this.To.Name = "To";
+            this.To.ReadOnly = true;
+            // 
+            // Departure
+            // 
+            this.Departure.HeaderText = "Abfahrt";
+            this.Departure.MinimumWidth = 12;
+            this.Departure.Name = "Departure";
+            this.Departure.ReadOnly = true;
+            // 
+            // Ankunft
+            // 
+            this.Ankunft.HeaderText = "Arrival";
+            this.Ankunft.MinimumWidth = 12;
+            this.Ankunft.Name = "Ankunft";
+            this.Ankunft.ReadOnly = true;
             // 
             // buttonSearch
             // 
@@ -201,6 +204,7 @@
             this.Controls.Add(this.labelTitel);
             this.Controls.Add(this.tableLayoutPanelVerbindungen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConnectionsForm";
             this.ShowIcon = false;
             this.Text = "Verbindungen";

@@ -24,7 +24,7 @@ namespace MyTransport.Station
 
             labelHeader.Text = stationName;
             dataGridViewStationTable.BeginInvoke(ApplyDataToDataGrid);
-            buttonLoadStationTable.Enabled = false;
+            buttonLoadStationTable.Enabled = true;
             loadingLabel.Text = "fertig";
         }
 

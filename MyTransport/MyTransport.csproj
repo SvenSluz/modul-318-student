@@ -6,11 +6,16 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationIcon>Icon\train.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <WarningLevel>2</WarningLevel>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="Icon\train.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\src\SwissTransport\SwissTransport.csproj" />

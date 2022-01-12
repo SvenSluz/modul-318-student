@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StationForm));
             this.dataGridViewStationTable = new System.Windows.Forms.DataGridView();
             this.columnLine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Departure = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -153,6 +154,7 @@
             this.Controls.Add(this.comboBoxStations);
             this.Controls.Add(this.dataGridViewStationTable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StationForm";
             this.Text = "StationForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStationTable)).EndInit();
